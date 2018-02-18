@@ -1,0 +1,386 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    
+        <style>
+            #dvTblSrch {
+                background-color: lightgray;
+            }
+
+            #tblAllVhlLst {
+                background-color: lightgray;
+                border: 1px solid black;
+                padding-top: 20px;
+            }
+
+            #tblAllVhlLstDv {
+                background-color: darkgray;
+                padding-left: 6px;
+                padding-top: 6px;
+                font-size: 18px;
+            }
+
+            #tblAddVhcl {
+                background-color: lightgray;
+                border: 2px 2px 2px 2px solid black;
+                padding-top: 20px;
+            }
+
+            #TdSpc {
+                border: none;
+                font-size: 18px;
+                background-color: darkgray;
+                padding-left: 6px;
+                padding-top: 6px;
+            }
+        </style>
+</head>
+<body>
+        <h2>Vehicle Details :</h2>
+        <div ng-controller="stuCntr">
+            <script src="~/scripts/bootstrap.min.js"></script>
+            <script src="~/scripts/jquery-1.10.2.min.js"></script>
+
+            <table>
+                <tr>
+                    <td>
+                        <div id="dvSearchButton">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="text" id="SearchEngine_Id" placeholder="Enter the vehicle Id" ng-model="id_Search" />
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <input type="submit" value="Search" ng-click="searchVehicleByIdForShow(id_Search)" />
+
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <input type="submit" value="Add Vehicle" ng-click="addNewVehicle()" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="dvVhclDetails" ng-show="dvVehicleDetails">
+                            <table cellpadding="12" class="table table-bordered table-hover" id="dvTblSrch">
+                                <tr>
+                                    <td>
+                                        <b>Id</b>
+                                    </td>
+                                    <td>
+                                        <b>Name</b>
+                                    </td>
+                                    <td>
+                                        <b>Age</b>
+                                    </td>
+                                    <td>
+                                        <b>Address</b>
+                                    </td>
+                                    <td>
+                                        <b>PanNumber</b>
+                                    </td>
+                                    <td>
+                                        <b>VehicleType</b>
+                                    </td>
+                                    <td>
+                                        <b>Maker</b>
+                                    </td>
+                                    <td>
+                                        <b>Horse Power</b>
+                                    </td>
+                                    <td>
+                                        <b>Cubic Capacity</b>
+                                    </td>
+                                    <td>
+                                        <b>Engine Number</b>
+                                    </td>
+                                    <td>
+                                        <b>Dealer Name</b>
+                                    </td>
+                                    <td>
+                                        <b>Manage</b>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="answer in answers track by  $index">
+                                    <td style="width:20px">
+                                        {{answer.Id}}
+                                    </td>
+                                    <td style="width:70px">
+                                        <div ng-show="valsh">
+                                            {{answer.Name}}
+                                        </div>
+                                        <div style="width:70px">
+                                            <input type="text" ng-model="answer.Name" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:30px">
+                                        <div ng-show="valsh">
+                                            {{answer.Age}}
+                                        </div>
+                                        <div style="width:30px">
+                                            <input type="text" ng-model="answer.Age" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:70px">
+                                        <div ng-show="valsh">
+                                            {{answer.Address}}
+                                        </div>
+                                        <div style="width:70px">
+                                            <input type="text" ng-model="answer.Address" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:95px">
+                                        <div ng-show="valsh">
+                                            {{answer.PanNumber}}
+                                        </div>
+                                        <div style="width:70px">
+                                            <input type="text" ng-model="answer.PanNumber" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:70px">
+                                        <div ng-show="valsh">
+                                            {{answer.Vehicle_Type}}
+                                        </div>
+                                        <div style="width:70px">
+                                            <input type="text" ng-model="answer.Vehicle_Type" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:70px">
+                                        <div ng-show="valsh">
+                                            {{answer.Maker}}
+                                        </div>
+                                        <div style="width:70px">
+                                            <input type="text" ng-model="answer.Maker" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:50px">
+                                        <div ng-show="valsh">
+                                            {{answer.Horse_Power}}
+                                        </div>
+                                        <div style="width:50px">
+                                            <input type="text" ng-model="answer.Horse_Power" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:50px">
+                                        <div ng-show="valsh">
+                                            {{answer.Cubic_Capacity}}
+                                        </div>
+                                        <div style="width:50px">
+                                            <input type="text" ng-model="answer.Cubic_Capacity" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:70px">
+                                        <div ng-show="valsh">
+                                            {{answer.Engine_Number}}
+                                        </div>
+                                        <div style="width:70px">
+                                            <input type="text" ng-model="answer.Engine_Number" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:70px">
+                                        <div ng-show="valsh">
+                                            {{answer.DealerName}}
+                                        </div>
+                                        <div style="width:70px">
+                                            <input type="text" ng-model="answer.DealerName" ng-show="txtsh" style="width:90%" />
+                                        </div>
+                                    </td>
+                                    <td style="width:190px">
+                                        <input type="submit" value="EditInfo" ng-show="updtbtn" ng-click="vehicleUpdate(answer)" />
+                                        <input type="submit" value="Cancel" ng-show="cnltbtn" ng-click="SearchVehicleByIdCancel(answer, $index)" />
+                                        <input type="submit" value="Save" ng-show="svbtn" ng-click="saveVehicle(answer,$index)" />
+                                        @*<input type="submit" value="Delete" ng-show="dltbtn" ng-click="deleteVehicle(answer,$index)" />*@
+        
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <table style="width:1200px ;">
+                                <tr>
+                                    <td>
+                                        <div id="tblAllVhlLstDv"><b>List of Registered Vehicles</b></div>
+                                        <table cellpadding="12" cellspacing="4" class="table table-bordered table-hover" id="tblAllVhlLst" >
+                                            <tr></tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Id</b>
+                                                </td>
+                                                <td>
+                                                    <b>Name</b>
+                                                </td>
+                                                <td>
+                                                    <b>Age</b>
+                                                </td>
+                                                <td>
+                                                    <b>Address</b>
+                                                </td>
+                                                <td>
+                                                    <b>PanNumber</b>
+                                                </td>
+                                                <td>
+                                                    <b>VehicleType</b>
+                                                </td>
+                                                <td>
+                                                    <b>Maker</b>
+                                                </td>
+                                                <td>
+                                                    <b>Horse Power</b>
+                                                </td>
+                                                <td>
+                                                    <b>Cubic Capacity</b>
+                                                </td>
+                                                <td>
+                                                    <b>Engine Number</b>
+                                                </td>
+                                                <td>
+                                                    <b>Dealer Name</b>
+                                                </td>
+                                                <td>
+                                                    <b>Manage</b>
+                                                </td>
+
+                                            </tr>
+                                            <tr ng-repeat ="stu in vehicles  track by $index ">
+                                                <td>
+                                                    {{stu.Id}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Name}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Age}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Address}}
+                                                </td>
+                                                <td>
+                                                    {{stu.PanNumber}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Vehicle_Type}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Maker}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Horse_Power}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Cubic_Capacity}}
+                                                </td>
+                                                <td>
+                                                    {{stu.Engine_Number}}
+                                                </td>
+                                                <td>
+                                                    {{stu.DealerName}}
+                                                </td>
+                                                <td style="width:190px">
+                                                    <input type="submit" value="Delete" ng-show="dltbtn" ng-click="deleteVehicle(stu,$index)" />
+                                                </td>
+
+                                        </table>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="dvAddStudnet" ng-show="dVehicle">
+                            <form name="myForm" class="myForm" required>
+                                <table table cellpadding="12" cellspacing="4" class="table table-bordered table-hover" id="tblAddVhcl">
+                                    <tr>
+                                        <td id="TdSpc"><b>{{Action}} New Vehicle</b></td>
+                                        <td id="TdSpc"></td>
+                                        <td id="TdSpc"></td>
+                                        <td id="TdSpc"></td>
+                                        <td id="TdSpc"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name : </td>
+                                        <td>
+                                            <input type="text" id="txtName" name="txtName" ng-model="vehicle.Name" ng-pattern="/^[a-zA-Z]*$/" required />
+                                            <br />
+                                            <span style="color:red" ng-show="myForm.txtName.$error.pattern" >Not a valid Name</span>
+                                          </td>
+                                        <td></td>
+                                        <td>Age : </td>
+                                        <td>
+                                            <input type="text" id="txtAge" ng-model="vehicle.Age" name="txtAge" ng-pattern="/^[0-9]{2}$/" required />
+                                            <br />
+                                            <span style="color:red" ng-show="myForm.txtAge.$error.pattern">Between 18 and 100</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address : </td>
+                                        <td>
+                                            <input type="text" id="txtAdress" ng-model="vehicle.Address" name="txtAdress" required />
+                                        </td>
+                                        <td></td>
+                                        <td>PanNumber : </td>
+                                        <td>
+                                            <input type="text" id="txtPanNumber" ng-model="vehicle.PanNumber" name="txtPanNumber"  required />
+                                          
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vehicle_Type : </td>
+                                        <td>
+                                            <input type="text" id="txtVehicle_Type" ng-model="vehicle.Vehicle_Type" name="txtVehicle_Type" required />
+                                        </td>
+                                        <td></td>
+                                        <td>Maker : </td>
+                                        <td>
+                                            <input type="text" id="txtMaker" ng-model="vehicle.Maker" name="txtMaker" required />
+                                        </td>
+                                    <tr>
+                                        <td>Horse Power: </td>
+                                        <td>
+                                            <input type="text" id="txtHorse_Power" ng-model="vehicle.Horse_Power" name="txtHorse_Power" ng-pattern="/^[0-9]{2}$/" required />
+                                            <br />
+                                            <span style="color:red" ng-show="myForm.txtHorse_Power.$error.pattern">Must be of 2 numbers</span>
+                                        </td>
+                                        <td></td>
+                                        <td>Cubic_Capacity: </td>
+                                        <td>
+                                            <input type="text" id="txtCubic_Capacity" ng-model="vehicle.Cubic_Capacity" name="txtCubic_Capacity" required />
+                                        </td>
+                                    <tr>
+                                        <td>Engine Number : </td>
+                                        <td>
+                                            <input type="text" id="txtEngine_Number" ng-model="vehicle.Engine_Number" name="txtEngine_Number" required />
+                                        </td>
+                                        <td></td>
+                                        <td>DealerName: </td>
+                                        <td>
+                                            <input type="text" id="txtDealerName" ng-model="vehicle.DealerName" name="txtDealerName" required />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="submit" value="Submit" ng-click="addNewVehicleDetail(vehicle)"
+                                                   ng-disabled="myForm.txtName.$invalid || myForm.txtAge.$invalid
+                                                || myForm.txtAdress.$invalid || myForm.txtPanNumber.$invalid || myForm.txtVehicle_Type.$invalid
+                                                && myForm.txtMaker.$invalid || myForm.txtHorse_Power.$invalid || myForm.txtCubic_Capacity.$invalid
+                                                && myForm.txtEngine_Number.$invalid || myForm.txtDealerName.$invalid " />
+                                            <span>*Fill all fields to enable submit</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+ </body>
+</html>
+
+
